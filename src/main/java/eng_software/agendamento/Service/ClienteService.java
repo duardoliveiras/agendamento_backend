@@ -20,4 +20,16 @@ public class ClienteService {
     public List<ClienteEntity> getAll(){
         return clienteRepository.findAll();
     }
+
+    public ClienteEntity postCliente(ClienteEntity cliente){
+        return clienteRepository.save(cliente);
+
+    }
+    public void deleteById(Long id){
+        clienteRepository.deleteById(id);
+    }
+    public void deleteAll(){
+        clienteRepository.deleteAll();
+    }
+
 }

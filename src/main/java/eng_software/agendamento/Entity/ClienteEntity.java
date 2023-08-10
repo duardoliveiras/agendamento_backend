@@ -1,17 +1,26 @@
 package eng_software.agendamento.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "cliente")
 public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name="nome")
     private String nome;
+
+    @Column(name="senha")
+    private String senha;
+
+    @Column(name="email")
+    private String email;
+
+    public ClienteEntity(){
+
+    }
 
     public Long getId() {
         return id;
@@ -27,5 +36,21 @@ public class ClienteEntity {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
