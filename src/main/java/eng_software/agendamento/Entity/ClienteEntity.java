@@ -2,7 +2,11 @@ package eng_software.agendamento.Entity;
 
 import jakarta.persistence.*;
 
-@Entity(name = "cliente")
+
+// Entidade do banco de dados
+// O Spring automaticamente cria uma tabela conforme os atributos da entidade
+@Entity
+@Table(name="cliente", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class ClienteEntity {
 
     @Id
@@ -15,7 +19,8 @@ public class ClienteEntity {
     @Column(name="senha")
     private String senha;
 
-    @Column(name="email")
+
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
     public ClienteEntity(){
