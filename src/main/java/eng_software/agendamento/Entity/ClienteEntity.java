@@ -11,7 +11,7 @@ public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long cd_cliente;
 
     @Column(name="nome")
     private String nome;
@@ -27,12 +27,12 @@ public class ClienteEntity {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getCd_cliente() {
+        return cd_cliente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCd_cliente(Long cd_cliente) {
+        this.cd_cliente = cd_cliente;
     }
 
     public String getNome() {

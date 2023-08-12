@@ -24,8 +24,8 @@ public class ClienteService {
     Exemplo: findById executa no banco select c1_0.id,c1_0.email,c1_0.nome,c1_0.senha from cliente c1_0 where c1_0.id=?
     */
 
-    public ClienteEntity getById(Long id) {
-        return clienteRepository.findById(id).get();
+    public ClienteEntity getById(Long cd_cliente) {
+        return clienteRepository.findById(cd_cliente).get();
 
     }
     public Optional<ClienteEntity> getByEmail(String email){

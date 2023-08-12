@@ -30,9 +30,9 @@ public class ClienteController {
     PasswordEncoder encoder;
 
 
-    @GetMapping("/{id}")
-    public ClienteEntity getById(@PathVariable("id") Long id){
-        return clienteService.getById(id);
+    @GetMapping("/{cd_cliente}")
+    public ClienteEntity getById(@PathVariable("cd_cliente") Long cd_cliente){
+        return clienteService.getById(cd_cliente);
     }
 
     @GetMapping()
@@ -54,11 +54,6 @@ public class ClienteController {
     @DeleteMapping()
     public void deleteAll(){
         clienteService.deleteAll();
-    }
-
-    @GetMapping("/findEmail/{email}")
-    public Optional<ClienteEntity> validaEmail(@PathVariable("email") String email){
-        return clienteService.getByEmail(email);
     }
 
     @GetMapping("/validaSenha")
