@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: eng_software.agendamento.AgendamentoApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.174 s - in eng_software.agendamento.AgendamentoApplicationTests
