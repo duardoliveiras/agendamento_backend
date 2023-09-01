@@ -1,6 +1,6 @@
 # Projeto Agendamento
 
-
+## Criando um contêiner do banco
 ### Criar um arquivo Dockerfile
 
 ```c
@@ -77,3 +77,47 @@ spring.datasource.initialize=true
 spring.datasource.continue-on-error=true
 # caso de erro no banco o servico continuara
 ```
+
+Então até aqui temos um banco postgres em um contêiner rodando localmente na porta 5432 e a uma aplicação spring rodando localmente na porta 8080.
+
+
+# Deploy da aplicação para nuvem
+Para isso usaremos o [render.com](www.render.com) pelo fato de fornecer uso gratuito. 
+Para isso precisaremos criar um contêiner da nossa API Spring.
+
+### Criando um banco de dados Postgres no Render
+Ao criar um banco de dados no Render, será nos gerado o `host, database, usuario e senha`. Devemos colocar essas informações la no `/scr/resources/application.properties`.
+![Postgres no Render](imgs/postgres_render.png)
+
+### Criando contêiner Spring
+Configurando o Dockerfile
+```dockerfile
+FROM ubuntu:latest as build 
+# utilizando o ubuntu como construção
+RUN sudo apt-get update
+# atualizar os repositórios
+RUN sudo apt-get install openjdk-17-jdk maven -y
+# instalando o JDK 17 (usar a versão correspondente do projeto)
+# Também instala o Maven que é o que estou utilizando para fazer o gerenciamente de dependências.
+WORKDIR /app 
+# define o diretorio atual
+COPY . .  
+# copia todos arquivos do diretorio para o diretorio da imagem
+RUN mvn clean package # constrói o projeto e cria o arquivo.jar
+
+# ocorrendo tudo certo, temos um projeto compilado, construído e um arquivo.jar 
+# agora iremos utilizar uma imagem JDK que é mais leve, para executar apenas o projeto construído
+
+FROM openjdk:17-jdk-slim
+# imagem final 
+EXPOSE 8080 
+# porta 
+WORKDIR /app
+COPY --from=build /app/target/agendamento-1.jar app.jar
+# copia o arquivo .jar gerado pelo maven na etapa de construcao e chama de app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+# comandos que serão executar quando instanciado o contêiner
+# java -jar app.jar
+```
+Com o Dockerfile devidamente configurado, já é possível criar um webservice no Render.
