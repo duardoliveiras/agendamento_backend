@@ -10,8 +10,9 @@
 	</parent>
 	<groupId>eng_software</groupId>
 	<artifactId>agendamento</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>agendamento</name>
+
 	<description>Projeto de engenharia de software</description>
 	<properties>
 		<java.version>17</java.version>

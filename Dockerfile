@@ -1,7 +1,11 @@
-FROM postgres:alpine
+FROM ubuntu:latest as build
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
+RUN ./gradlew bootJar --no-daemon
 
-ENV POSTGRES_DB agendamento
-ENV POSTGRES_USER eduardo
-ENV POSTGRES_PASSWORD 12345
+FROM openjdk:17-jdk-slim
+EXPOSE 8080
+COPY --from-build /build/libs/agendamento-1.jar app.jar
 
-COPY init.sql /docker-entrypoint-initdb.d/
+ENTRYPOINT ["java", "-jar", "app.jar"]
